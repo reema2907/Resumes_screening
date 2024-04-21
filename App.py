@@ -74,7 +74,15 @@ def course_recommender(course_list):
     return rec_course
 
 # Connect to database
-connection = pymysql.connect(host='localhost', user='root', password='Igdtuw@123', db='cv')
+# Connect to database
+# Load environment variables from secrets.toml
+DB_HOST = st.secrets["env"]["DB_HOST"]
+DB_USER = st.secrets["env"]["DB_USER"]
+DB_PASSWORD = st.secrets["env"]["DB_PASSWORD"]  # Replace this with your actual password
+DB_NAME = st.secrets["env"]["DB_NAME"]
+
+# Connect to database
+connection = pymysql.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, db=DB_NAME)
 cursor = connection.cursor()
 
 def insert_data(name, email, res_score, timestamp, skills):
