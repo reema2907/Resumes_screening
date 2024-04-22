@@ -8,6 +8,5 @@ pymysql
 streamlit-tags
 Pillow
 youtube-dl
-nltk
-pdfminer3
+nltk==3.4.5
 spacy==2.3.5
