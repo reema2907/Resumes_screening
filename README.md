@@ -6,7 +6,7 @@
 
 
 ## Source 
--Extracting user's information from the Resume, I used PyResparser
+-Extracting user's information from the Resume, I used PyResparser    
 -Extracting Resume PDF into Text, I used PDFMiner.
 
 ## Features
