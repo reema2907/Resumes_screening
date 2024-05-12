@@ -10,7 +10,7 @@
 -Extracting Resume PDF into Text, I used PDFMiner.
 
 ## Features
-- User's & Admin Section
+- Resume Analyser and Score Board  Section
 - Resume Score
 - Career Recommendations
 - Resume writing Tips suggestions
