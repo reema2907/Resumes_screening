@@ -218,10 +218,10 @@ def run():
                                    value=resume_data['skills'], key='1  ')
 
                 ds_keyword = ['tensorflow', 'keras', 'pytorch', 'machine learning', 'deep Learning', 'flask', 'streamlit',
-            'distributed systems', 'data engineering', 'data pipelines', 'neural networks', 'reinforcement learning',
-            'natural language processing', 'computer vision', 'time series analysis', 'anomaly detection',
-            'model deployment', 'model serving', 'tensorflow serving', 'kubernetes', 'docker', 'apache spark',
-            'hadoop', 'pyspark', 'big data']
+                 'distributed systems', 'data engineering', 'data pipelines', 'neural networks', 'reinforcement learning',
+                  'natural language processing', 'computer vision', 'time series analysis', 'anomaly detection',
+                  'model deployment', 'model serving', 'tensorflow serving', 'kubernetes', 'docker', 'apache spark',
+                  'hadoop', 'pyspark', 'big data']
 
                 web_keyword = ['react', 'django', 'node jS', 'react js', 'php', 'laravel', 'magento', 'wordpress', 'javascript',
                             'angular js', 'c#', 'flask', 'html', 'css', 'bootstrap', 'jquery', 'restful apis', 'graphql',
@@ -272,6 +272,7 @@ def run():
                                         'ids/ips (intrusion detection/prevention system)', 'firewall configuration',
                                         'security compliance (e.g., gdpr, hipaa)', 'incident response', 'threat intelligence',
                                         'cryptography', 'pki (public key infrastructure)', 'secure coding practices']
+                
                 business_analyst_keyword = ['requirements gathering', 'stakeholder management', 'business process modeling',
                                             'use case analysis', 'user stories', 'business requirements documentation',
                                             'functional requirements', 'non-functional requirements', 'gap analysis',
@@ -280,199 +281,206 @@ def run():
                                             'stakeholder interviews', 'data analysis', 'data visualization',
                                             'business intelligence tools', 'process improvement', 'change management',
                                             'project management methodologies (e.g., agile, waterfall)', 'business domain knowledge']
+                
+                category_scores = {
+                    'Data Scientist': 0,
+                    'Web Developer': 0,
+                    'Android Developer': 0,
+                    'IOS Developer': 0,
+                    'UI-UX Developer': 0,
+                    'backend Developer':0,
+                    'Devops Engineer':0,
+                    'Full-stack Developer':0,
+                    'Software Engineer' :0,
+                    'Cybersecurity' :0,
+                    'Business Analyst':0,
+                }
+                
+                for skill in resume_data['skills']:
+                    skill_lower = skill.lower()
+                    # Update the score for each category based on the presence of the skill
+                    if skill_lower in ds_keyword:
+                        category_scores['Data Scientist'] += 1
+                    if skill_lower in web_keyword:
+                        category_scores['Web Developer'] += 1
+                    if skill_lower in android_keyword:
+                        category_scores['Android Developer'] += 1
+                    if skill_lower in ios_keyword :
+                        category_scores['IOS Developer'] += 1
+                    if skill_lower in uiux_keyword :
+                        category_scores['UI-UX Developer'] += 1
+                    if skill_lower in backend_keyword:
+                        category_scores['backend Developer'] += 1
+                    if skill_lower in devops_keyword:
+                        category_scores['Devops Engineer'] += 1
+                    if skill_lower in fullstack_keyword:
+                        category_scores['Full-stack Developer'] += 1
+                    if skill_lower in software_engineer_keyword:
+                        category_scores['Software Engineer'] += 1
+                    if skill_lower in cybersecurity_keyword :
+                        category_scores['Cybersecurity'] += 1
+                    if skill_lower in  business_analyst_keyword:
+                        category_scores['Business Analyst'] += 1
+                    
+                best_match = max(category_scores, key=category_scores.get)
+                st.success(f"**Perfect for {best_match} Jobs.**")   
+                
+                score2=0
+                if best_match.lower() == role.lower():
+                  score2 = 20
+
+
 
 
                 recommended_skills = []
                 
 
-                for i in resume_data['skills']:
-                    if i.lower() in ds_keyword:
-                        reco_field = 'Data Science'
-                        st.success("**Perfect for Data Science Jobs.**")
-                        recommended_skills = ['Data Visualization', 'Predictive Analysis', 'Statistical Modeling',
-                                            'Data Mining', 'Clustering & Classification', 'Data Analytics',
-                                            'Quantitative Analysis', 'Web Scraping', 'ML Algorithms', 'Keras',
-                                            'Pytorch', 'Probability', 'Scikit-learn', 'Tensorflow', "Flask",
-                                            'Streamlit']
-                        
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        rec_course = course_recommender(ds_course)
-                        break
+                if "data scientist" in role.lower():
+                    # Code for Data Scientist recommendation
+                    reco_field = 'Data Scientist'
+                   
+                    recommended_skills = ['Data Visualization', 'Predictive Analysis', 'Statistical Modeling',
+                                        'Data Mining', 'Clustering & Classification', 'Data Analytics',
+                                        'Quantitative Analysis', 'Web Scraping', 'ML Algorithms', 'Keras',
+                                        'Pytorch', 'Probability', 'Scikit-learn', 'Tensorflow', "Flask",
+                                        'Streamlit']
+                    # Display recommended skills
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(...)
+                    rec_course = course_recommender(ds_course)
 
-                    elif i.lower() in web_keyword:
-                        reco_field = 'Web Development'
-                        st.success("**Perfect for Web Development Jobs.**")
-                        recommended_skills = ['React', 'Django', 'Node JS', 'React JS', 'php', 'laravel', 'Magento',
-                                            'wordpress', 'Javascript', 'Angular JS', 'c#', 'Flask', 'SDK']
-                        
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        rec_course = course_recommender(web_course)
-                        break
+                elif "web developer" in role.lower():
+                    # Code for Web Developer recommendation
+                    reco_field = 'Web Developer'
+                   
+                    recommended_skills = ['React', 'Django', 'Node JS', 'React JS', 'php', 'laravel', 'Magento',
+                                        'wordpress', 'Javascript', 'Angular JS', 'c#', 'Flask', 'SDK']
+                    # Display recommended skills
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(...)
+                    rec_course = course_recommender(web_course)
 
-                    elif i.lower() in android_keyword:
-                        reco_field = 'Android Development'
-                        st.success("**Best for Android App Development Jobs.**")
-                        recommended_skills = ['Android', 'Android development', 'Flutter', 'Kotlin', 'XML', 'Java',
+                elif "android developer" in role.lower():
+                    # Code for Web Developer recommendation
+                    recommended_skills = ['Android', 'Android development', 'Flutter', 'Kotlin', 'XML', 'Java',
                                             'Kivy', 'GIT', 'SDK', 'SQLite']
                         
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        rec_course = course_recommender(android_course)
-                        break
-
-                    elif i.lower() in ios_keyword:
-                        reco_field = 'IOS Development'
-                        st.success("**Perfect for IOS App Development Jobs.**")
-                        recommended_skills = ['IOS', 'IOS Development', 'Swift', 'Cocoa', 'Cocoa Touch', 'Xcode',
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(
+                        '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
+                        unsafe_allow_html=True)
+                    rec_course = course_recommender(android_course)
+                
+                elif "IOS developer" in role.lower():
+                    recommended_skills = ['IOS', 'IOS Development', 'Swift', 'Cocoa', 'Cocoa Touch', 'Xcode',
                                             'Objective-C', 'SQLite', 'Plist', 'StoreKit', "UI-Kit",
                                             'AV Foundation', 'Auto-Layout']
                         
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        rec_course = course_recommender(ios_course)
-                        break
-
-                    elif i.lower() in uiux_keyword:
-                        reco_field = 'UI-UX Development'
-                        st.success("**Perfect for UI-UX Development Jobs.**")
-                        recommended_skills = ['UI', 'User Experience', 'Adobe XD', 'Figma', 'Zeplin', 'Balsamiq',
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(
+                        '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
+                        unsafe_allow_html=True)
+                    rec_course = course_recommender(ios_course)
+                elif "UI/UX developer" in role.lower():
+                    recommended_skills = ['UI', 'User Experience', 'Adobe XD', 'Figma', 'Zeplin', 'Balsamiq',
                                             'Prototyping', 'Wireframes', 'Storyframes', 'Adobe Photoshop',
                                             'Editing', 'Illustrator', 'After Effects', 'Premier Pro', 'Indesign',
                                             'Wireframe', 'Solid', 'Grasp', 'User Research']
-                        
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        rec_course = course_recommender(uiux_course)
-                        break
+                    
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(
+                        '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
+                        unsafe_allow_html=True)
+                    rec_course = course_recommender(uiux_course)    
 
-                    elif i.lower() in backend_keyword:
-                        reco_field = 'Backend Development'
-                        st.success("**Perfect for Backend Development Jobs.**")
-                        recommended_skills = ['REST API', 'GraphQL', 'Microservices', 'Serverless', 'ORM (Object-Relational Mapping)',
+                elif "backend  developer" in role.lower():
+                    recommended_skills = ['REST API', 'GraphQL', 'Microservices', 'Serverless', 'ORM (Object-Relational Mapping)',
                                             'Database Design', 'SQL', 'NoSQL', 'MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Memcached',
                                             'API Security', 'Authentication', 'Authorization', 'JWT (JSON Web Tokens)', 'OAuth']
                         
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(
+                        '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
+                        unsafe_allow_html=True)
                         
-                        break
-
-                    elif i.lower() in devops_keyword:
-                        reco_field = 'DevOps Engineering'
-                        st.success("**Perfect for DevOps Engineering Jobs.**")
-                        recommended_skills = ['CI/CD (Continuous Integration/Continuous Deployment)', 'Jenkins', 'Travis CI', 'GitLab CI',
+                elif "Devops engineer" in role.lower():
+                    recommended_skills = ['CI/CD (Continuous Integration/Continuous Deployment)', 'Jenkins', 'Travis CI', 'GitLab CI',
                                             'CircleCI', 'Docker', 'Kubernetes', 'Helm', 'Terraform', 'Ansible', 'Puppet', 'Chef',
                                             'Monitoring', 'Logging', 'Alerting', 'Infrastructure as Code (IaC)', 'AWS', 'Azure',
                                             'Google Cloud Platform (GCP)']
                         
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        
-                        break
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(
+                        '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
+                        unsafe_allow_html=True)
 
-                    elif i.lower() in fullstack_keyword:
-                        reco_field = 'Full-Stack Development'
-                        st.success("**Perfect for Full-Stack Development Jobs.**")
-                        recommended_skills = ['Express.js', 'ASP.NET', 'Spring Boot', 'Ruby on Rails', 'Flask', 'Django', 'Vue.js',
+                elif "full-stack developer" in role.lower():
+                    recommended_skills = ['Express.js', 'ASP.NET', 'Spring Boot', 'Ruby on Rails', 'Flask', 'Django', 'Vue.js',
                                             'Angular', 'Ember.js', 'MEAN stack', 'MERN stack', 'LAMP stack', 'Server-side rendering',
                                             'Progressive Web Apps (PWA)', 'WebSockets', 'Real-time applications',
                                             'Web security best practices', 'OWASP Top 10']
                         
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        
-                        break
-
-                    elif i.lower() in software_engineer_keyword:
-                        reco_field = 'Software Engineering'
-                        st.success("**Perfect for Software Engineering Jobs.**")
-                        recommended_skills = ['Algorithms', 'Data Structures', 'Design Patterns', 'Object-Oriented Programming (OOP)',
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(
+                        '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
+                        unsafe_allow_html=True)
+                
+                elif "software engineer" in role.lower():
+                    recommended_skills = ['Algorithms', 'Data Structures', 'Design Patterns', 'Object-Oriented Programming (OOP)',
                                             'Functional Programming', 'Test-driven Development (TDD)', 'Agile Methodology', 'Scrum',
                                             'Kanban', 'Code Review', 'Refactoring', 'Debugging', 'Version Control (Git, SVN)',
                                             'Software Architecture', 'System Design', 'Performance Optimization', 'Code Profiling']
                         
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        
-                        break
-
-                    elif i.lower() in cybersecurity_keyword:
-                        reco_field = 'Cybersecurity'
-                        st.success("**Perfect for Cybersecurity Jobs.**")
-                        recommended_skills = ['Penetration Testing', 'Vulnerability Assessment', 'Ethical Hacking', 'Network Security',
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(
+                        '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
+                        unsafe_allow_html=True)
+                    
+                elif "cybersequrity" in role.lower():
+                    recommended_skills = ['Penetration Testing', 'Vulnerability Assessment', 'Ethical Hacking', 'Network Security',
                                             'Web Application Security', 'Endpoint Security', 'SIEM (Security Information and Event Management)',
                                             'IDS/IPS (Intrusion Detection/Prevention System)', 'Firewall Configuration',
                                             'Security Compliance (e.g., GDPR, HIPAA)', 'Incident Response', 'Threat Intelligence',
                                             'Cryptography', 'PKI (Public Key Infrastructure)', 'Secure Coding Practices']
                         
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        
-                        break
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(
+                        '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
+                        unsafe_allow_html=True)  
 
-                    elif i.lower() in business_analyst_keyword:
-                        reco_field = 'Business Analysis'
-                        st.success("**Perfect for Business Analyst Jobs.**")
-                        recommended_skills = ['Requirements Gathering', 'Stakeholder Management', 'Business Process Modeling',
-                                            'Use Case Analysis', 'User Stories', 'Business Requirements Documentation',
-                                            'Functional Requirements', 'Non-Functional Requirements', 'Gap Analysis',
-                                            'SWOT Analysis', 'Cost-Benefit Analysis', 'ROI (Return on Investment)',
-                                            'KPIs (Key Performance Indicators)', 'Business Case Development',
-                                            'Stakeholder Interviews', 'Data Analysis', 'Data Visualization',
-                                            'Business Intelligence Tools', 'Process Improvement', 'Change Management',
-                                            'Project Management Methodologies (e.g., Agile, Waterfall)', 'Business Domain Knowledge']
+                elif "business analyst" in role.lower():
+                    recommended_skills = ['Penetration Testing', 'Vulnerability Assessment', 'Ethical Hacking', 'Network Security',
+                                            'Web Application Security', 'Endpoint Security', 'SIEM (Security Information and Event Management)',
+                                            'IDS/IPS (Intrusion Detection/Prevention System)', 'Firewall Configuration',
+                                            'Security Compliance (e.g., GDPR, HIPAA)', 'Incident Response', 'Threat Intelligence',
+                                            'Cryptography', 'PKI (Public Key Infrastructure)', 'Secure Coding Practices']
                         
-                        recommended_keywords = st_tags(label='### Recommended skills for you.',
-                                                    text='Recommended skills generated from System',
-                                                    value=recommended_skills, key='6')
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
-                            unsafe_allow_html=True)
-                        
-                        break
-
+                    recommended_keywords = st_tags(label='### Recommended skills for you.',
+                                                text='Recommended skills generated from System',
+                                                value=recommended_skills, key='6')
+                    st.markdown(
+                        '''<h4 style='text-align: left; color: #1ed760;'>Adding this skills to resume will boost🚀 the chances of getting a Job💼</h4>''',
+                        unsafe_allow_html=True)  
                 
 
                 ts = time.time()
@@ -521,7 +529,7 @@ def run():
                         similarity_score = calculate_cosine_similarity(role_keywords, skills)
                         
                         # Convert cosine similarity to percentage
-                        similarity_percentage = int(similarity_score * 100)
+                        similarity_percentage = int(similarity_score * 80)
 
                         return similarity_percentage
                     else:
@@ -547,7 +555,7 @@ def run():
                     unsafe_allow_html=True,
                 )
                 # Display progress bar
-                resume_score = resume_score + score1
+                resume_score = score1+score2
                 score = 0
 
                 # Display progress bar
