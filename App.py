@@ -325,10 +325,7 @@ def run():
                 best_match = max(category_scores, key=category_scores.get)
                 st.success(f"**Perfect for {best_match} Jobs.**")   
                 
-                score2=0
-                if best_match.lower() == role.lower():
-                  score2 = 20
-
+                
 
 
 
@@ -555,7 +552,15 @@ def run():
                     unsafe_allow_html=True,
                 )
                 # Display progress bar
-                resume_score = score1+score2
+
+                def calculate_role_score(best_match, role):
+                    score2 = 0  # Initialize score
+                    if best_match.lower() == role.lower():
+                        score2 = 20  # Assign score if there's a match
+                    return score2
+
+                matching_score= calculate_role_score(best_match, role)
+                resume_score = score1+ matching_score
                 score = 0
 
                 # Display progress bar
